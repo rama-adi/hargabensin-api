@@ -49,7 +49,6 @@ class ScraperTester extends Command
         $migrateFresh = confirm(
             label: 'Do you want to migrate:fresh the database?',
             default: false,
-            required: true
         );
 
         $this->info("Testing $scaper scraper...");

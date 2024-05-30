@@ -4,8 +4,6 @@ use App\Jobs\Scraper\BPScraper;
 use App\Jobs\Scraper\PertaminaScraper;
 use App\Jobs\Scraper\ShellScraper;
 use App\Jobs\Scraper\VivoScraper;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::call(function () {
@@ -20,7 +18,7 @@ Schedule::call(function () {
         dispatch(new $scraper());
     }
 
-})->daily();
+})->dailyAt('13:00');
 
 //Artisan::command('inspire', function () {
 //    $this->comment(Inspiring::quote());
