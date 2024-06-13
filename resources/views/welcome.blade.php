@@ -39,7 +39,7 @@
                 <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Data</a>
                 <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Harga</a>
                 <a href="#" class="text-sm font-semibold leading-6 text-gray-900">About</a>
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Dokumentasi</a>
+                <a href="https://hargabensin.rama-adi.dev/docs/index.html" class="text-sm font-semibold leading-6 text-gray-900">Dokumentasi</a>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
                 <a href="{{route('login')}}" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
