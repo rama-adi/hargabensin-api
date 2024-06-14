@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/v1')->middleware('auth:sanctum')->group(function () {
+Route::prefix('/v1')->group(function () {
     Route::prefix('/latest-prices')->group(function () {
         Route::get('/', [LatestFuelPriceController::class, 'latestPrices']);
         Route::get('/province/{province}', [LatestFuelPriceController::class, 'byProvinceLatest']);

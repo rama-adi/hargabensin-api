@@ -47,16 +47,17 @@ class LatestFuelPriceController extends Controller
             ->where('province_id', $province->id)
             ->get();
 
-        $data = $prices->map(function (Price $price) {
+        $products = $prices->map(function ($price) {
             return [
                 'product_id' => $price->product->id,
                 'product_name' => $price->product->name,
                 'brand_name' => $price->product->brand->name,
                 'price' => $price->price,
+                'last_updated' => $price->created_at->format('U'),
             ];
-        });
+        })->unique('product_id');
 
-        return response()->json($data);
+        return response()->json($products);
     }
 
     /**
@@ -73,10 +74,7 @@ class LatestFuelPriceController extends Controller
      */
     public function byBrandLatest(Brand $brand): JsonResponse
     {
-        $products = Product::with('prices.province')
-            ->where('brand_id', $brand->id)
-            ->get();
-
+        $products = $brand->products;
         return $this->mapAndDisplayProducts($products);
     }
 
@@ -110,7 +108,7 @@ class LatestFuelPriceController extends Controller
         $data = $products->map(function ($product) {
 
             $pricesQuery = $product->prices()->with('province');
-            $pricesQuery = $pricesQuery->orderBy('created_at', 'desc')->limit(1);
+            $pricesQuery = $pricesQuery->orderBy('created_at', 'desc');
 
             $prices = $pricesQuery->get()->map(function ($price) {
                 return [
@@ -118,7 +116,7 @@ class LatestFuelPriceController extends Controller
                     'price' => $price->price,
                     'last_updated' => $price->created_at->format('U'),
                 ];
-            });
+            })->unique('province');
 
             return [
                 'product_id' => $product->id,
